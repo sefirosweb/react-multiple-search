@@ -1,14 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
-// import PropTypes from 'prop-types';
-import './InputSearch.css'
+import React, { Dispatch, useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai'
+import './InputSearch.css'
 
-type Filters = {
+export type FilterLabel = {
   label: string
+  filter: string
+}
+
+export type Filters = FilterLabel & {
   text: string,
 }
 
-export const InputSearch = () => {
+export type Props = {
+  filterLabels: Array<FilterLabel>
+  filters: Array<Filters>
+  setFilters: Dispatch<Array<Filters>>
+}
+
+export type PropsRef = {
+
+};
+
+export const InputSearch: React.FC<Props> = (props) => {
+  const { filterLabels, filters, setFilters } = props
   const inputRef = useRef<HTMLInputElement>(null);
   const labelsRef = useRef<HTMLLIElement[]>([])
   const [text, setText] = useState('');
@@ -17,29 +31,13 @@ export const InputSearch = () => {
   const [focusMouseMove, setFocusMouseMove] = useState<boolean>(true);
 
 
-  const initial_labels = [
-    'Products',
-    'Categories',
-    'Brands',
-    'Stores',
-    'Deals',
-    'Coupons',
-    'Promotions',
-    'Gift Cards',
-    'Reviews',
-    'Questions',
-    'Answers',
-    'Users',
-    'Lists',
-    'Wishlists',
-    'Registry',
-    'Baby Registry',
-    'Wedding Registry',
-    'Help',
-  ]
+  const [labels, setLabels] = useState<Array<FilterLabel>>([])
 
-  const [labels, setLabels] = useState<string[]>(initial_labels)
-  const [filters, setFilters] = useState<Filters[]>([]);
+  useEffect(() => {
+    if (!filterLabels) return
+    setLabels(filterLabels)
+
+  }, [filterLabels])
 
   useEffect(() => {
     if (focusMouse === null || !focusMouseMove) return
@@ -52,8 +50,9 @@ export const InputSearch = () => {
     setFilters(
       [...filters,
       {
-        label: label,
         text: text,
+        label: label.label,
+        filter: label.filter,
       }]
     )
     setText('')
@@ -90,8 +89,8 @@ export const InputSearch = () => {
       setFocusMouseMove(false)
       const newFocus = focus === labels.length - 1 ? 0 : focus + 1
       setFocus(newFocus)
-      if (labelsRef[newFocus]) {
-        labelsRef[newFocus].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+      if (labelsRef.current[newFocus]) {
+        labelsRef.current[newFocus].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
       }
 
     } else if (e.key === 'ArrowUp') {
@@ -99,16 +98,18 @@ export const InputSearch = () => {
       setFocusMouseMove(false)
       const newFocus = focus === 0 ? labels.length - 1 : focus - 1
       setFocus(newFocus)
-      if (labelsRef[newFocus]) {
-        labelsRef[newFocus].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+      if (labelsRef.current[newFocus]) {
+        labelsRef.current[newFocus].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
       }
 
     } else if (e.key === 'Enter') {
       addText()
+
     } else if (e.key === 'Backspace') {
       if (text === '') {
         deleteText(filters.length - 1)
       }
+
     } else if (e.key === 'Escape') {
       setText('')
       setFocus(0)
@@ -122,7 +123,6 @@ export const InputSearch = () => {
   const onMouseOut = () => {
     setFocusMouse(null)
   }
-
 
   return (
     <>
@@ -150,6 +150,13 @@ export const InputSearch = () => {
                 className="style-32"
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={inputKeyDown}
+                onBlur={(e) => {
+                  if (e.relatedTarget !== null && labelsRef.current && labelsRef.current.includes(e.relatedTarget as HTMLLIElement)) {
+                    return
+                  }
+                  setText('')
+                  setFocus(0)
+                }}
                 ref={inputRef}
               />
 
@@ -164,14 +171,15 @@ export const InputSearch = () => {
                       onMouseOver={() => onMouseOver(index)}
                       onMouseOut={() => onMouseOut()}
                       onClick={addText}
+                      tabIndex={0}
                       ref={el => {
                         if (el) {
-                          labelsRef[index] = el
+                          labelsRef.current[index] = el
                         }
                       }}
                     >
                       <div className="style-34">
-                        <span className="style-35"> Search <b className="style-36">{label}</b> for: <b className="style-37">{text}</b></span>
+                        <span className="style-35"> Search <b className="style-36">{label.label}</b> for: <b className="style-37">{text}</b></span>
                       </div>
                     </li>
                   ))}
@@ -186,12 +194,4 @@ export const InputSearch = () => {
       </div>
     </>
   )
-};
-
-InputSearch.propTypes = {
-
-};
-
-InputSearch.defaultProps = {
-  user: null,
 };
