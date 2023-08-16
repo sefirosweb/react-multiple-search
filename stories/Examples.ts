@@ -1,4 +1,4 @@
-import { FilterLabel } from "./InputSearch";
+import { FilterLabel } from "./types";
 
 export const initialFilterLabels: Array<FilterLabel> = [
     {

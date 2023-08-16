@@ -1,15 +1,8 @@
-import React, { Dispatch, useEffect, useRef, useState } from 'react';
+import React, { Dispatch, Ref, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai'
 import './InputSearch.css'
+import { FilterLabel, Filters } from './types';
 
-export type FilterLabel = {
-  label: string
-  filter: string
-}
-
-export type Filters = FilterLabel & {
-  text: string,
-}
 
 export type Props = {
   filterLabels: Array<FilterLabel>
@@ -18,10 +11,10 @@ export type Props = {
 }
 
 export type PropsRef = {
-
+  inputRef: HTMLInputElement | null
 };
 
-export const InputSearch: React.FC<Props> = (props) => {
+export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
   const { filterLabels, filters, setFilters } = props
   const inputRef = useRef<HTMLInputElement>(null);
   const labelsRef = useRef<HTMLLIElement[]>([])
@@ -47,14 +40,19 @@ export const InputSearch: React.FC<Props> = (props) => {
   const addText = () => {
     if (text === '') return
     const label = labels[focus]
-    setFilters(
-      [...filters,
-      {
-        text: text,
-        label: label.label,
-        filter: label.filter,
-      }]
-    )
+    const filter = filters.find(f => f.text === text && f.label === label.label)
+
+    if (!filter) {
+      setFilters(
+        [...filters,
+        {
+          text: text,
+          label: label.label,
+          filter: label.filter,
+        }]
+      )
+    }
+
     setText('')
     setFocus(0)
     if (inputRef.current) {
@@ -124,9 +122,13 @@ export const InputSearch: React.FC<Props> = (props) => {
     setFocusMouse(null)
   }
 
+  useImperativeHandle(ref, () => ({
+    inputRef: inputRef.current,
+  }));
+
   return (
     <>
-      <div className="style-21" style={{ padding: '50px' }}>
+      <div className="style-21">
         <div className="style-22" role="search">
           <div className="style-23" role="search" aria-autocomplete="list">
             <i className="style-24" role="img" aria-label="Search..." title="Search..."><AiOutlineSearch /></i>
@@ -194,4 +196,4 @@ export const InputSearch: React.FC<Props> = (props) => {
       </div>
     </>
   )
-};
+})
