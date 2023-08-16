@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { InputSearch, PropsRef } from './InputSearch';
 import { useArgs } from '@storybook/client-api';
 import { initialFilterLabels } from './Examples';
-import { Filters } from './types';
+import { Filters, InputSearch, PropsRef } from '../components';
 
 const meta: Meta<typeof InputSearch> = {
   component: InputSearch
