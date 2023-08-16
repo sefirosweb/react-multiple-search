@@ -1,68 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Filters, InputSearch, Props } from './InputSearch';
-import { type FilterLabel, } from './InputSearch';
 import { useArgs } from '@storybook/client-api';
-
-
-const initialFilterLabels: Array<FilterLabel> = [
-  {
-    label: 'All',
-    filter: 'all'
-  },
-  {
-    label: 'Name',
-    filter: 'name'
-  },
-  {
-    label: 'Email',
-    filter: 'email'
-  },
-  {
-    label: 'Phone',
-    filter: 'phone'
-  },
-  {
-    label: 'Address',
-    filter: 'address'
-  },
-  {
-    label: 'Company',
-    filter: 'company'
-  },
-  {
-    label: 'Job Title',
-    filter: 'job_title'
-  },
-  {
-    label: 'Department',
-    filter: 'department'
-  },
-  {
-    label: 'Skills',
-    filter: 'skills'
-  },
-  {
-    label: 'University',
-    filter: 'university'
-  },
-  {
-    label: 'Degree',
-    filter: 'degree'
-  },
-  {
-    label: 'Major',
-    filter: 'major'
-  },
-  {
-    label: 'Graduation Year',
-    filter: 'graduation_year'
-  },
-  {
-    label: 'GPA',
-    filter: 'gpa'
-  },
-]
+import { initialFilterLabels } from './Examples';
 
 const meta: Meta<typeof InputSearch> = {
   component: InputSearch
@@ -93,7 +33,7 @@ export const Primary: Story = {
 
     return (
       <InputSearch
-        filters={storyArgs.filters ?? []}
+        filters={storyArgs.filters}
         setFilters={setFilters}
         filterLabels={filterLabels}
       />
