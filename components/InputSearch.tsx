@@ -1,8 +1,7 @@
 import React, { Dispatch, Ref, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai'
 import './InputSearch.css'
 import { FilterLabel, Filters } from './types';
-
+import { AiOutlineSearch } from './AiOutlineSearch';
 
 export type Props = {
   filterLabels: Array<FilterLabel>
@@ -22,8 +21,6 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
   const [focus, setFocus] = useState(0);
   const [focusMouse, setFocusMouse] = useState<number | null>(null);
   const [focusMouseMove, setFocusMouseMove] = useState<boolean>(true);
-
-
   const [labels, setLabels] = useState<Array<FilterLabel>>([])
 
   useEffect(() => {
@@ -122,6 +119,15 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
     setFocusMouse(null)
   }
 
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.relatedTarget !== null && labelsRef.current && labelsRef.current.includes(e.relatedTarget as HTMLLIElement)) {
+      return
+    }
+
+    setText('')
+    setFocus(0)
+  }
+
   useImperativeHandle(ref, () => ({
     inputRef: inputRef.current,
   }));
@@ -152,13 +158,7 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
                 className="style-32"
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={inputKeyDown}
-                onBlur={(e) => {
-                  if (e.relatedTarget !== null && labelsRef.current && labelsRef.current.includes(e.relatedTarget as HTMLLIElement)) {
-                    return
-                  }
-                  setText('')
-                  setFocus(0)
-                }}
+                onBlur={onBlur}
                 ref={inputRef}
               />
 

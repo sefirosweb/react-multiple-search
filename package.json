@@ -17,6 +17,7 @@
     "@storybook/addon-interactions": "^7.3.1",
     "@storybook/addon-links": "^7.3.1",
     "@storybook/blocks": "^7.3.1",
+    "@storybook/client-api": "^7.3.1",
     "@storybook/react": "^7.3.1",
     "@storybook/react-vite": "^7.3.1",
     "@storybook/testing-library": "^0.2.0",
@@ -25,9 +26,5 @@
     "react-dom": "^18.2.0",
     "sass": "^1.65.1",
     "storybook": "^7.3.1"
-  },
-  "dependencies": {
-    "@storybook/client-api": "^7.3.1",
-    "react-icons": "^4.10.1"
   }
 }
