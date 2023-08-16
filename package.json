@@ -1,17 +1,23 @@
 {
-  "name": "react-multiple-search",
-  "version": "1.0.0",
+  "name": "@sefirosweb/react-multiple-search",
+  "version": "0.0.1",
+  "author": "@Sefirosweb",
   "description": "",
   "main": "index.js",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "search",
+    "filter",
+    "input",
+    "multipl"
+  ],
   "scripts": {
     "start": "npm run storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@storybook/addon-essentials": "^7.3.1",
     "@storybook/addon-interactions": "^7.3.1",
