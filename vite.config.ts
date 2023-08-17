@@ -13,20 +13,17 @@ export default defineConfig({
 
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-      ],
+      external: ['react', 'react-dom'],
       output: {
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
+          'styled-components': 'styled',
         },
       },
     },
     sourcemap: false,
     emptyOutDir: true,
   },
-  plugins: [react(), dts(),
-  ],
+  plugins: [react(), dts()],
 })

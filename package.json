@@ -2,13 +2,23 @@
   "name": "@sefirosweb/react-multiple-search",
   "version": "0.0.1",
   "author": "@Sefirosweb",
-  "description": "",
+  "description": "It´s a React compononet to use a multiple searchs or filters in one input, but you can specific in wich field you want to search",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/react-crud.umd.cjs",
-  "module": "./dist/react-crud.js",
+  "main": "./dist/react-multiple-search.umd.cjs",
+  "module": "./dist/react-multiple-search.js",
   "types": "./dist/index.d.ts",
   "private": false,
+  "exports": {
+    ".": {
+      "import": "./dist/react-multiple-search.js",
+      "require": "./dist/react-multiple-search.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "react",
     "search",
@@ -16,15 +26,9 @@
     "input",
     "multipl"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/react-multiple-search.js",
-      "require": "./dist/react-multiple-search.umd.cjs"
-    }
+  "publishConfig": {
+    "access": "public"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "start": "npm run storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -32,6 +36,13 @@
     "build-storybook": "storybook build",
     "build": "vite build",
     "pack": "npm run build && rm -f sefirosweb-react-multiple-search-* && npm pack && mv sefirosweb-react-multiple-search-* sefirosweb-react-multiple-search-$(date +%Y%m%d-%H%M%S).tgz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sefirosweb/react-multiple-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sefirosweb/react-multiple-search/issues"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.3.1",
@@ -53,6 +64,7 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.0.7"
   }
 }

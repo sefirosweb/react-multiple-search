@@ -1,4 +1,3 @@
-
 export type FilterLabel = {
     label: string
     filter: string
