@@ -1,6 +1,6 @@
 {
   "name": "@sefirosweb/react-multiple-search",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "author": "@Sefirosweb",
   "description": "It´s a React compononet to use a multiple searchs or filters in one input, but you can specific in wich field you want to search",
   "license": "MIT",
