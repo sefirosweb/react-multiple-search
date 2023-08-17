@@ -19,5 +19,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src"],
+  "exclude": ["node_modules", "src/InputSearch/style.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
