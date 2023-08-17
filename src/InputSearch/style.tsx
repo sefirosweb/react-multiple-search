@@ -93,7 +93,6 @@ export const ButtonLabel = styled.div`
   border-radius: 4px 0px 0px 4px;
   transition: none 0s ease 0s;
   position: relative;
-  z-index: 2;
   box-sizing: border-box;
 `;
 
@@ -142,7 +141,6 @@ export const DeleteButton = styled.button`
   border-radius: 4px;
   transition: none 0s ease 0s;
   position: relative;
-  z-index: 2;
   appearance: button;
   text-transform: none;
   margin: 0px;
@@ -183,7 +181,6 @@ export const MenuSearch = styled.ul`
   inset: calc(100% + 3px) 0px auto auto;
   width: 100%;
   display: block;
-  z-index: 1000;
   min-width: 160px;
   padding: 8px 0px;
   margin: 0px;
