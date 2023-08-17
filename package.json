@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "author": "@Sefirosweb",
   "description": "",
-  "main": "index.js",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/react-crud.umd.cjs",
+  "module": "./dist/react-crud.js",
+  "types": "./dist/index.d.ts",
+  "private": false,
   "keywords": [
     "react",
     "search",
@@ -12,11 +16,22 @@
     "input",
     "multipl"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/react-multiple-search.js",
+      "require": "./dist/react-multiple-search.umd.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "npm run storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build": "vite build",
+    "pack": "npm run build && rm -f sefirosweb-react-multiple-search-* && npm pack && mv sefirosweb-react-multiple-search-* sefirosweb-react-multiple-search-$(date +%Y%m%d-%H%M%S).tgz"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.3.1",
@@ -27,10 +42,19 @@
     "@storybook/react": "^7.3.1",
     "@storybook/react-vite": "^7.3.1",
     "@storybook/testing-library": "^0.2.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.65.1",
-    "storybook": "^7.3.1"
+    "storybook": "^7.3.1",
+    "vite-plugin-dts": "^3.5.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "styled-components": "^6.0.7"
   }
 }

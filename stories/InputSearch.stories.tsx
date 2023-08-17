@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useArgs } from '@storybook/client-api';
 import { initialFilterLabels } from './Examples';
-import { Filters, InputSearch, PropsRef } from '../src';
+import InputSearch, { Filters, InputSearchPropsRef } from '../src';
 
 const meta: Meta<typeof InputSearch> = {
   component: InputSearch
@@ -23,7 +23,7 @@ export const Primary: Story = {
     const [storyArgs, updateStoryArgs] = useArgs();
     const [filters, setFilters] = useState<Array<Filters>>([]);
 
-    const ref = useRef<PropsRef>(null);
+    const ref = useRef<InputSearchPropsRef>(null);
 
     useEffect(() => {
       updateStoryArgs({ filters });

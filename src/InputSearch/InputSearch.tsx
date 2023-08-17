@@ -1,7 +1,7 @@
 import React, { Dispatch, Ref, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import './InputSearch.css'
-import { FilterLabel, Filters } from './types';
-import { AiOutlineSearch } from './AiOutlineSearch';
+import { FilterLabel, Filters } from '../types';
+import { AiOutlineSearch } from '../AiOutlineSearch';
+import { DeleteButton, Input, LineLabel, MainDiv, SearchDiv, SearchListDiv, SearchIcon, SearchInputDiv, FiltersListItem, ButtonLabel, DeleteDiv, DeleteSmall, MenuSearch, LineLabelDiv, SpanSearchText, StronLabel, StrongLabelText, ButtonLabelSmall } from './style'
 
 export type Props = {
   filterLabels: Array<FilterLabel>
@@ -134,28 +134,27 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
 
   return (
     <>
-      <div className="style-21">
-        <div className="style-22" role="search">
-          <div className="style-23" role="search" aria-autocomplete="list">
-            <i className="style-24" role="img" aria-label="Search..." title="Search..."><AiOutlineSearch /></i>
-            <div className="style-25">
+      <MainDiv>
+        <SearchDiv role="search">
+          <SearchListDiv role="search" aria-autocomplete="list">
+            <SearchIcon role="img" aria-label="Search..." title="Search..."><AiOutlineSearch /></SearchIcon>
+            <SearchInputDiv>
 
               {filters.map((filter, index) => (
-                <div className="style-26" role="listitem" aria-label="search" key={index}>
-                  <div className="style-27" role="button"><small className="style-28">{filter.label}</small></div>
-                  <div className="style-29"><small className="style-30">{filter.text}</small>
-                    <button className="style-31" role="button" aria-label="Remove" title="Remove" onClick={() => deleteText(index)} />
-                  </div>
-                </div>
+                <FiltersListItem role="listitem" aria-label="search" key={index}>
+                  <ButtonLabel role="button"><ButtonLabelSmall>{filter.label}</ButtonLabelSmall></ButtonLabel>
+                  <DeleteDiv><DeleteSmall>{filter.text}</DeleteSmall>
+                    <DeleteButton role="button" aria-label="Remove" title="Remove" onClick={() => deleteText(index)} />
+                  </DeleteDiv>
+                </FiltersListItem>
               ))}
 
 
-              <input
+              <Input
                 type="text"
                 value={text}
                 role='searchbox'
                 placeholder="Search..."
-                className="style-32"
                 onChange={(e) => setText(e.target.value)}
                 onKeyDown={inputKeyDown}
                 onBlur={onBlur}
@@ -164,10 +163,10 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
 
 
               {text !== '' &&
-                <ul className="style-33" role="menu">
+                <MenuSearch role="menu">
 
                   {labels.map((label, index) => (
-                    <li
+                    <LineLabel
                       className={`${index === focus || index === focusMouse ? 'focus' : ''}`}
                       key={index}
                       onMouseOver={() => onMouseOver(index)}
@@ -180,20 +179,20 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
                         }
                       }}
                     >
-                      <div className="style-34">
-                        <span className="style-35"> Search <b className="style-36">{label.label}</b> for: <b className="style-37">{text}</b></span>
-                      </div>
-                    </li>
+                      <LineLabelDiv>
+                        <SpanSearchText> Search <StronLabel>{label.label}</StronLabel> for: <StrongLabelText>{text}</StrongLabelText></SpanSearchText>
+                      </LineLabelDiv>
+                    </LineLabel>
                   ))}
 
-                </ul>
+                </MenuSearch>
               }
 
-            </div>
-          </div>
+            </SearchInputDiv>
+          </SearchListDiv>
 
-        </div>
-      </div>
+        </SearchDiv>
+      </MainDiv>
     </>
   )
 })
