@@ -166,6 +166,7 @@ import{r as R,R as ie}from"./index-61bf1805.js";import{_ as P,a as xe}from"./tsl
   inset: calc(100% + 3px) 0px auto auto;
   width: 100%;
   display: block;
+  z-index: 100;
   min-width: 160px;
   padding: 8px 0px;
   margin: 0px;
@@ -258,4 +259,4 @@ import{r as R,R as ie}from"./index-61bf1805.js";import{_ as P,a as xe}from"./tsl
       </>;
   }
 }`,...(Nt=(Dt=me.parameters)==null?void 0:Dt.docs)==null?void 0:Nt.source}}};const wn=["Primary"];export{me as Primary,wn as __namedExportsOrder,_n as default};
-//# sourceMappingURL=InputSearch.stories-9abe4282.js.map
+//# sourceMappingURL=InputSearch.stories-55de58be.js.map
