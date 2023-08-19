@@ -181,6 +181,7 @@ export const MenuSearch = styled.ul`
   inset: calc(100% + 3px) 0px auto auto;
   width: 100%;
   display: block;
+  z-index: 100;
   min-width: 160px;
   padding: 8px 0px;
   margin: 0px;
