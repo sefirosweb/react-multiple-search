@@ -34,9 +34,9 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
     setFocus(focusMouse)
   }, [focusMouse, focusMouseMove])
 
-  const addText = () => {
+  const addText = (iputLabel?: FilterLabel) => {
     if (text === '') return
-    const label = labels[focus]
+    const label = iputLabel ?? labels[focus]
     const filter = filters.find(f => f.text === text && f.label === label.label)
 
     if (!filter) {
@@ -171,7 +171,7 @@ export const InputSearch = forwardRef((props: Props, ref: Ref<PropsRef>) => {
                       key={index}
                       onMouseOver={() => onMouseOver(index)}
                       onMouseOut={() => onMouseOut()}
-                      onClick={addText}
+                      onClick={() => addText(label)}
                       tabIndex={0}
                       ref={el => {
                         if (el) {
